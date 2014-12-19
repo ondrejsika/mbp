@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'south',
 
     # local
+    'bootstrap',
     'account',
     'profile',
     'transaction',
