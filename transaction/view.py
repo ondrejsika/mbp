@@ -14,17 +14,17 @@ def create_view(request):
     token = request.REQUEST.get('token')
     try:
         profile_id = int(request.REQUEST.get('profile_id'))
-    except ValueError:
+    except (ValueError, TypeError):
         profile_id = None
     try:
         amount_btc = request.REQUEST.get('amount_btc')
         float(amount_btc)
-    except ValueError:
+    except (ValueError, TypeError):
         amount_btc = None
     try:
         amount_czk = request.REQUEST.get('amount_czk')
         float(amount_czk)
-    except ValueError:
+    except (ValueError, TypeError):
         amount_czk = None
 
     profile = get_object_or_404(Profile, id=profile_id, account__token=token)
