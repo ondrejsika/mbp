@@ -30,7 +30,7 @@ class Transaction(models.Model):
 
     @property
     def wallet(self):
-        return get_wallet_from_xpub(self.profile.account.xpub, self.id)
+        return get_wallet_from_xpub(self.profile.xpub, self.id)
 
     def __unicode__(self):
         return u'#%s %s BTC %s CZK' % (self.id, self.amount_btc, self.amount_czk)
