@@ -1,5 +1,5 @@
 <h1>Bitcoin Solutions</h1>
-<h2>Payment details</h2>
+<h2>Payment details - {% if transaction.description %}{{ transaction.description|linebreaksbr }}{% endif %}</h2>
 <style>
     input {
         font-family: monospace;
@@ -39,12 +39,30 @@
                         State
                     </td>
                     <td>
-                        {{ transaction.get_state_display }}
+                        <span style="color: {% if transaction.state == transaction.CONFIRMED %}green{% else %}red{% endif %};">
+                            {{ transaction.get_state_display }}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Timestamp
+                    </td>
+                    <td>
+                        {{ transaction.timestamp }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Transaction ID
+                    </td>
+                    <td>
+                        {{ transaction.id }}
                     </td>
                 </tr>
             </table>
         </td>
-        <td width="50%">
+        <td width="50%" valign="top">
             <h3>{{ transaction.profile.name }}</h3>
             <p>{{ transaction.profile.description|linebreaksbr }}</p>
         </td>

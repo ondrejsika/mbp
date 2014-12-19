@@ -27,6 +27,7 @@ class Transaction(models.Model):
     amount_czk = models.DecimalField(max_digits=9, decimal_places=2)
     state = models.CharField(max_length=1, choices=STATES.items(), default=UNCONFIRMED)
     timestamp = models.DateTimeField(auto_now_add=True)
+    description = models.TextField(blank=True, default='')
 
     @property
     def wallet(self):
@@ -36,12 +37,13 @@ class Transaction(models.Model):
         return u'#%s %s BTC %s CZK' % (self.id, self.amount_btc, self.amount_czk)
 
     @staticmethod
-    def create(profile, amount_btc=None, amount_czk=None):
+    def create(profile, amount_btc=None, amount_czk=None, description=''):
         amount_btc, amount_czk = to_btc_czk(amount_btc, amount_czk)
         tr = Transaction(
             profile=profile,
             amount_btc=amount_btc,
             amount_czk=amount_czk,
+            description=description,
         )
         tr.save()
         return tr

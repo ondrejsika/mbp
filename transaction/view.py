@@ -12,6 +12,7 @@ from .models import Transaction
 
 def create_view(request):
     token = request.REQUEST.get('token')
+    description = request.REQUEST.get('description', '')
     try:
         profile_id = int(request.REQUEST.get('profile_id'))
     except (ValueError, TypeError):
@@ -33,6 +34,7 @@ def create_view(request):
         profile=profile,
         amount_czk=amount_czk,
         amount_btc=amount_btc,
+        description=description,
     )
     return HttpResponse(tr.url())
 
