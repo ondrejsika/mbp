@@ -4,10 +4,10 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'twistedexample.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-
+    url(r'^', include('account.urls', namespace='account')),
     url(r'^tr/', include('transaction.urls', namespace='tr')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^', include('login.urls')),
+    url(r'^', include('password_reset.urls')),
+
 )

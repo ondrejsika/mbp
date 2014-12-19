@@ -41,6 +41,9 @@ INSTALLED_APPS = (
     'south',
 
     # local
+    'main',
+    'password_reset',
+    'login',
     'bootstrap',
     'account',
     'profile',
@@ -55,6 +58,20 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    # default
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+
+    # local
+    'django.core.context_processors.request',
 )
 
 ROOT_URLCONF = 'urls'
@@ -92,3 +109,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 ORIGIN = 'http://localhost:8000'
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'

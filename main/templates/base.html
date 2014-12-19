@@ -1,0 +1,9 @@
+{% extends "bootstrap/base.html" %}
+{% block bootstrap_body %}
+    {% include "menu.html" %}
+
+    <div class="container">
+    {% block container %}
+    {% endblock container %}
+    </div>
+{% endblock bootstrap_body %}
