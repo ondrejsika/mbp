@@ -6,7 +6,11 @@ from django.core.urlresolvers import reverse
 # app
 from profile.models import Profile
 from currency import to_btc_czk
-from utils import timestamp_random_string
+from main_utils import timestamp_random_string
+from main_utils.wallet import get_wallet_from_xpub
+
+# local
+from .utils import is_confirmed
 
 
 class Transaction(models.Model):
@@ -24,6 +28,10 @@ class Transaction(models.Model):
     state = models.CharField(max_length=1, choices=STATES.items(), default=UNCONFIRMED)
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def wallet(self):
+        return get_wallet_from_xpub(self.profile.account.xpub, self.id)
+
     def __unicode__(self):
         return u'#%s %s BTC %s CZK' % (self.id, self.amount_btc, self.amount_czk)
 
@@ -37,6 +45,14 @@ class Transaction(models.Model):
         )
         tr.save()
         return tr
+
+    @staticmethod
+    def confirm_transactions():
+        for tr in Transaction.objects.filter(state=Transaction.UNCONFIRMED):
+            if is_confirmed(tr):
+                tr.state = Transaction.CONFIRMED
+                tr.save()
+
 
     def url(self):
         return settings.ORIGIN + reverse('tr:detail', args=(self.token, ))
