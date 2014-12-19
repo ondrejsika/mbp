@@ -39,4 +39,7 @@ def create_view(request):
 
 def detail_view(request, token):
     tr = get_object_or_404(Transaction, token=token)
-    return HttpResponse(str(tr))
+
+    return render(request, 'transaction/detail.html', {
+        'transaction': tr,
+    })

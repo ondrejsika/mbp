@@ -1,0 +1,56 @@
+<h1>Bitcoin Solutions</h1>
+<h2>Payment details</h2>
+<style>
+    input {
+        font-family: monospace;
+        width: 300px;
+    }
+</style>
+<table width="100%">
+    <tr>
+        <td width="50%">
+            <table width="100%">
+                <tr>
+                    <td>
+                        Wallet
+                    </td>
+                    <td>
+                        <input value="{{ transaction.profile.wallet }}" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Amount (BTC)
+                    </td>
+                    <td>
+                        <input value="{{ transaction.amount_btc }}" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Amount (CZK)
+                    </td>
+                    <td>
+                        {{ transaction.amount_czk }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        State
+                    </td>
+                    <td>
+                        {{ transaction.get_state_display }}
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td width="50%">
+            <h3>{{ transaction.profile.name }}</h3>
+            <p>{{ transaction.profile.description|linebreaksbr }}</p>
+        </td>
+    </tr>
+</table>
+
+<hr>
+
+2014 (c) <a href="http://bitcoin-solutions.cz">Bitcoin Solutions</a>
