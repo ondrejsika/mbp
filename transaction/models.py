@@ -1,8 +1,12 @@
 # django
 from django.db import models
+from django.conf import settings
+from django.core.urlresolvers import reverse
 
 # app
 from profile.models import Profile
+from currency import to_btc_czk
+from utils import timestamp_random_string
 
 
 class Transaction(models.Model):
@@ -14,10 +18,25 @@ class Transaction(models.Model):
     }
 
     profile = models.ForeignKey(Profile)
+    token = models.CharField(max_length=32, unique=True, default=timestamp_random_string)
     amount_btc = models.DecimalField(max_digits=9, decimal_places=8)
     amount_czk = models.DecimalField(max_digits=9, decimal_places=2)
-    state = models.CharField(max_length=1, choices=STATES.items())
+    state = models.CharField(max_length=1, choices=STATES.items(), default=UNCONFIRMED)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         return u'#%s %s BTC %s CZK' % (self.id, self.amount_btc, self.amount_czk)
+
+    @staticmethod
+    def create(profile, amount_btc=None, amount_czk=None):
+        amount_btc, amount_czk = to_btc_czk(amount_btc, amount_czk)
+        tr = Transaction(
+            profile=profile,
+            amount_btc=amount_btc,
+            amount_czk=amount_czk,
+        )
+        tr.save()
+        return tr
+
+    def url(self):
+        return settings.ORIGIN + reverse('tr:detail', args=(self.token, ))
