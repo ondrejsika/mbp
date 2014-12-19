@@ -33,6 +33,9 @@ class Transaction(models.Model):
     def wallet(self):
         return get_wallet_from_xpub(self.profile.xpub, self.id)
 
+    class Meta:
+        ordering = ('-pk', )
+
     def __unicode__(self):
         return u'#%s %s BTC %s CZK' % (self.id, self.amount_btc, self.amount_czk)
 

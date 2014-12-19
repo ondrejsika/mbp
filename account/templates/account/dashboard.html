@@ -2,4 +2,40 @@
 {% load i18n %}
 {% block container %}
     <h1>Dashboard</h1>
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>All transactions</h2>
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Amount (BTC)</th>
+                    <th>Amount (CZK)</th>
+                    <th>Profile</th>
+                </tr>
+                {% for tr in all_transactions %}
+                    <tr style="color: {% if tr.state == tr.CONFIRMED %}green{% else %}red{% endif %};">
+                        <td>{{ tr.id }}</td>
+                        <td>{{ tr.amount_btc }} BTC</td>
+                        <td>{{ tr.amount_czk }} CZK</td>
+                        <td>{{ tr.profile.name }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-lg-6">
+            <h2>Profiles</h2>
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+                {% for profile in request.user.account.profile_set.all %}
+                    <tr>
+                        <td>{{ profile.name }}</td>
+                        <td><a href="" class="btn-sm btn-info">Edit</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 {% endblock container %}

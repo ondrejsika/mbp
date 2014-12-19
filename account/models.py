@@ -9,7 +9,7 @@ from main_utils import timestamp_random_string
 
 
 class Account(models.Model):
-    user = models.ForeignKey(User)
+    user = models.OneToOneField(User)
     email = models.EmailField()
     token = models.CharField(max_length=32, unique=True, default=timestamp_random_string)
 
