@@ -9,7 +9,7 @@ from .models import Profile
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = ('account', )
+        exclude = ('account', 'token', )
 
     def __init__(self, account, *args, **kwargs):
         self.account = account

@@ -2,7 +2,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 
-
 # app
 from profile.models import Profile
 
@@ -14,10 +13,6 @@ def create_view(request):
     token = request.REQUEST.get('token')
     description = request.REQUEST.get('description', '')
     try:
-        profile_id = int(request.REQUEST.get('profile_id'))
-    except (ValueError, TypeError):
-        profile_id = None
-    try:
         amount_btc = request.REQUEST.get('amount_btc')
         float(amount_btc)
     except (ValueError, TypeError):
@@ -28,7 +23,7 @@ def create_view(request):
     except (ValueError, TypeError):
         amount_czk = None
 
-    profile = get_object_or_404(Profile, id=profile_id, account__token=token)
+    profile = get_object_or_404(Profile, token=token)
 
     tr = Transaction.create(
         profile=profile,

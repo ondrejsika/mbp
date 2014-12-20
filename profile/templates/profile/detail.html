@@ -21,8 +21,18 @@
                     <td>{{ profile.description|linebreaksbr }}</td>
                 </tr>
                 <tr>
+                    <th>Token</th>
+                    <td>{{ profile.token }}</td>
+                </tr>
+                <tr>
                     <th>xpub</th>
-                    <td>{{ profile.xpub }}</td>
+                    <td>
+                        {% if request.user.account.priv_editable_xpubs %}
+                            {{ profile.xpub }}
+                        {% else %}
+                            {{ profile.xpub|truncatechars:14 }}
+                        {% endif %}
+                    </td>
                 </tr>
             </table>
         </div>
