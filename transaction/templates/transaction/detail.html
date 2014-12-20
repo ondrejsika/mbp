@@ -1,11 +1,16 @@
-<h1>Bitcoin Solutions</h1>
-<h2>Payment details - {% if transaction.description %}{{ transaction.description }}{% endif %}</h2>
 <style>
+    * {
+        font-family: Arial;
+    }
     input {
         font-family: monospace;
         width: 300px;
     }
 </style>
+
+<img src="{{ STATIC_URL }}mbp_logo.png" style="width: 40px;">
+<h1 style="display: inline-block">My Bitcoin Payments</h1>
+<h2>Payment details - {% if transaction.description %}{{ transaction.description }}{% endif %}</h2>
 <table width="100%">
     <tr>
         <td width="50%">
@@ -71,4 +76,4 @@
 
 <hr>
 
-2014 (c) <a href="http://bitcoin-solutions.cz">Bitcoin Solutions</a>
+2014 &copy; <a href="http://mybitcoinpayments.com">My Bitcoin Payments</a>
