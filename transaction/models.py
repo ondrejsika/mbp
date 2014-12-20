@@ -60,4 +60,4 @@ class Transaction(models.Model):
 
 
     def url(self):
-        return settings.ORIGIN + reverse('tr:detail', args=(self.token, ))
+        return settings.ORIGIN + reverse('tr:payment', args=(self.token, ))

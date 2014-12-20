@@ -53,7 +53,7 @@
                         <td>{{ tr.amount_btc }} BTC</td>
                         <td>{{ tr.amount_czk }} CZK</td>
                         <td><a target="_blank" href="https://blockchain.info/address/{{ tr.wallet }}">{{ tr.wallet }}</a></td>
-                        <td><a target="_blank" href="{% url 'tr:detail' tr.token %}" class="btn-sm btn-info">Detail</a></td>
+                        <td><a target="_blank" href="{% url 'tr:payment' tr.token %}" class="btn-sm btn-info">Payment page</a></td>
                     </tr>
                 {% endfor %}
             </table>
