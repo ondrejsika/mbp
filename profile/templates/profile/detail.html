@@ -2,6 +2,9 @@
 {% load i18n %}
 {% block container %}
     <h1>Profile - {{ profile.name }}</h1>
+    <p>
+        <a href="{% url 'profile:edit' profile.id %}" class="btn-sm btn-info">Edit</a>
+    </p>
     <div class="row">
         <div class="col-lg-12">
             <table class="table">

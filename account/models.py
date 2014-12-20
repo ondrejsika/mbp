@@ -14,6 +14,10 @@ class Account(models.Model):
     email = models.EmailField()
     token = models.CharField(max_length=32, unique=True, default=timestamp_random_string)
 
+    # privileges
+    priv_editable_xpubs = models.BooleanField(default=False)
+    priv_can_create_profile = models.BooleanField(default=False)
+
     def __unicode__(self):
         return u'%s' % self.user
 

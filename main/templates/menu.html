@@ -12,6 +12,9 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="{% url 'account:dashboard' %}">Dashboard</a></li>
+                {% if request.user.account.priv_can_create_profile %}
+                    <li><a href="{% url 'profile:new' %}">New profile</a></li>
+                {% endif %}
                 {% if request.user.is_authenticated %}
                     <li><a href="{% url 'logout' %}">Logout</a></li>
                 {% else %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block container %}
+    {% if profile %}
+        <h1>Profile - {{ profile.name }}</h1>
+    {% else %}
+        <h1>New profile</h1>
+    {% endif %}
+    <form method="post">
+    {% csrf_token %}
+    {% include 'form.html' %}
+    <input type="submit" value="Save">
+    </form>
+{% endblock container %}
