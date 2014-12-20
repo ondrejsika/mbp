@@ -23,8 +23,8 @@ class Transaction(models.Model):
 
     profile = models.ForeignKey(Profile)
     token = models.CharField(max_length=32, unique=True, default=timestamp_random_string)
-    amount_btc = models.DecimalField(max_digits=9, decimal_places=8)
-    amount_czk = models.DecimalField(max_digits=9, decimal_places=2)
+    amount_btc = models.DecimalField(max_digits=12, decimal_places=8)
+    amount_czk = models.DecimalField(max_digits=12, decimal_places=2)
     state = models.CharField(max_length=1, choices=STATES.items(), default=UNCONFIRMED)
     timestamp = models.DateTimeField(auto_now_add=True)
     description = models.TextField(blank=True, default='')
@@ -58,6 +58,5 @@ class Transaction(models.Model):
                 tr.state = Transaction.CONFIRMED
                 tr.save()
 
-
     def url(self):
-        return settings.ORIGIN + reverse('tr:payment', args=(self.token, ))
+        return settings.ORIGIN + reverse('tr:payment_detail', args=(self.token, ))

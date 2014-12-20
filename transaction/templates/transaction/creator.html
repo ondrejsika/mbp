@@ -28,7 +28,7 @@
                 <input class="form-control" data-ng-model="description" type="text">
             </div>
         </div>
-        <pre>{{ ORIGIN }}{% url 'tr:create' %}?token={{ profile.token }}&amount_czk={% verbatim %}{{ amount_czk }}&amount_btc={{ amount_btc }}&description={{ description }}{% endverbatim %}</pre>
-        <a target="_blank" class="btn btn-info" href="{{ ORIGIN }}{% url 'tr:create' %}?token={{ profile.token }}&amount_czk={% verbatim %}{{ amount_czk }}&amount_btc={{ amount_btc }}&description={{ description }}{% endverbatim %}">Create payment</a></a>
+        <pre>{{ ORIGIN }}{% url 'tr:payment_create' %}?token={{ profile.token }}&amount_czk={% verbatim %}{{ amount_czk }}&amount_btc={{ amount_btc }}&description={{ description }}{% endverbatim %}</pre>
+        <a target="_blank" class="btn btn-info" href="{{ ORIGIN }}{% url 'tr:payment_create' %}?token={{ profile.token }}&amount_czk={% verbatim %}{{ amount_czk }}&amount_btc={{ amount_btc }}&description={{ description }}{% endverbatim %}">Create payment</a></a>
     </div>
 {% endblock container %}
