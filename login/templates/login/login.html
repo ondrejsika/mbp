@@ -3,7 +3,7 @@
 {% block container %}
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% include 'form.html' %}
         <input type="submit" value="{% trans 'Přihlásit se' %}">
     </form>
 {% endblock container %}
