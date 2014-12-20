@@ -43,7 +43,7 @@ class Account(models.Model):
 
 
 def user_post_save(sender, instance, created, **kwargs):
-    if not instance.account:
+    if not hasattr(instance, 'account'):
         instance.account = Account(user=instance, email=instance.email)
     instance.account.email = instance.email
     instance.account.save(update_user=False)
