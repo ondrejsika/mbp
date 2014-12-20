@@ -6,4 +6,5 @@
         {% include 'form.html' %}
         <input type="submit" value="{% trans 'Přihlásit se' %}">
     </form>
+    <p style="margin-top: 10px"><a href="{% url 'password_reset' %}">Password reset</a></p>
 {% endblock container %}
