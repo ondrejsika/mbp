@@ -1,6 +1,7 @@
 # django
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render, get_object_or_404
+from django.conf import settings
 
 # app
 from profile.models import Profile
@@ -23,6 +24,9 @@ def create_view(request):
     except (ValueError, TypeError):
         amount_czk = None
 
+    if not bool(amount_czk) != bool(amount_btc):
+        return HttpResponseBadRequest('amount_czk XOR amount_btc')
+
     profile = get_object_or_404(Profile, token=token)
 
     tr = Transaction.create(
@@ -39,4 +43,13 @@ def payment_view(request, token):
 
     return render(request, 'transaction/payment.html', {
         'transaction': tr,
+    })
+
+
+def creator_view(request, profile_id):
+    profile = get_object_or_404(Profile, id=profile_id)
+
+    return render(request, 'transaction/creator.html', {
+        'profile': profile,
+        'ORIGIN': settings.ORIGIN,
     })

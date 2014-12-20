@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block container %}
+    <script src="{{ STATIC_URL }}angular.js"></script>
+    <h1>Create payment - {{ profile.name }}</h1>
+    <div data-ng-app>
+        <div class="row" style="margin-bottom: 5px">
+            <div class="col-lg-2">
+                Amount (CZK)
+            </div>
+            <div class="col-lg-1">
+                <input class="form-control" data-ng-model="amount_czk" type="number">
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 5px">
+            <div class="col-lg-2">
+                Amount (BTC)
+            </div>
+            <div class="col-lg-1">
+                <input class="form-control" data-ng-model="amount_btc" type="number">
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 5px">
+            <div class="col-lg-2">
+                Description
+            </div>
+            <div class="col-lg-4">
+                <input class="form-control" data-ng-model="description" type="text">
+            </div>
+        </div>
+        <pre>{{ ORIGIN }}{% url 'tr:create' %}?token={{ profile.token }}&amount_czk={% verbatim %}{{ amount_czk }}&amount_btc={{ amount_btc }}&description={{ description }}{% endverbatim %}</pre>
+        <a target="_blank" class="btn btn-info" href="{{ ORIGIN }}{% url 'tr:create' %}?token={{ profile.token }}&amount_czk={% verbatim %}{{ amount_czk }}&amount_btc={{ amount_btc }}&description={{ description }}{% endverbatim %}">Create payment</a></a>
+    </div>
+{% endblock container %}
