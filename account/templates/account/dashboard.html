@@ -7,6 +7,18 @@
             <h2>All transactions</h2>
             <table class="table">
                 <tr>
+                    <th>Confirmed amount</th>
+                    <td style="color: green;">{{ request.user.account.get_confirmed_amount.btc }} BTC</td>
+                    <td style="color: green;">{{ request.user.account.get_confirmed_amount.czk }} CZK</td>
+                </tr>
+                <tr>
+                    <th>Unconfirmed amount</th>
+                    <td style="color: red;">{{ request.user.account.get_unconfirmed_amount.btc }} BTC</td>
+                    <td style="color: red;">{{ request.user.account.get_unconfirmed_amount.czk }} CZK</td>
+                </tr>
+            </table>
+            <table class="table">
+                <tr>
                     <th>ID</th>
                     <th>Amount (BTC)</th>
                     <th>Amount (CZK)</th>
@@ -28,12 +40,18 @@
                 <tr>
                     <th>Name</th>
                     <th></th>
+                    <th>Confirmed</th>
+                    <th>Unconfirmed</th>
                 </tr>
                 {% for profile in request.user.account.profile_set.all %}
                     <tr>
                         <td>{{ profile.name }}</td>
-                        <td><a href="" class="btn-sm btn-info">Detail</a>
+                        <td><a href="{% url 'profile:detail' profile.id %}" class="btn-sm btn-info">Detail</a>
                         <a href="" class="btn-sm btn-info">Edit</a></td>
+                        <td style="color: green;">{{ profile.get_confirmed_amount.btc }} BTC<br>
+                        {{ profile.get_confirmed_amount.czk }} CZK</td>
+                        <td style="color: red;">{{ profile.get_unconfirmed_amount.btc }} BTC<br>
+                        {{ profile.get_unconfirmed_amount.czk }} CZK</td>
                     </tr>
                 {% endfor %}
             </table>

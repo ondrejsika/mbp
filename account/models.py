@@ -17,6 +17,20 @@ class Account(models.Model):
     def __unicode__(self):
         return u'%s' % self.user
 
+    def get_confirmed_amount(self):
+        from transaction.models import Transaction
+
+        return Transaction.objects.filter(profile__account=self, state=Transaction.CONFIRMED)\
+            .aggregate(btc=models.Sum('amount_btc'),
+                       czk=models.Sum('amount_czk'))
+
+    def get_unconfirmed_amount(self):
+        from transaction.models import Transaction
+
+        return Transaction.objects.filter(profile__account=self, state=Transaction.UNCONFIRMED) \
+            .aggregate(btc=models.Sum('amount_btc'),
+                       czk=models.Sum('amount_czk'))
+
     def save(self, update_user=True, **kwargs):
         if update_user:
             self.user.email = self.email

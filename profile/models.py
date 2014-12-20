@@ -14,3 +14,14 @@ class Profile(models.Model):
     def __unicode__(self):
         return u'%s' % self.name
 
+    def get_confirmed_amount(self):
+        from transaction.models import Transaction
+
+        return self.transaction_set.filter(state=Transaction.CONFIRMED).aggregate(btc=models.Sum('amount_btc'),
+                                                                                  czk=models.Sum('amount_czk'))
+
+    def get_unconfirmed_amount(self):
+        from transaction.models import Transaction
+
+        return self.transaction_set.filter(state=Transaction.UNCONFIRMED).aggregate(btc=models.Sum('amount_btc'),
+                                                                                    czk=models.Sum('amount_czk'))
