@@ -16,7 +16,7 @@
                     <li><a href="{% url 'profile:new' %}">New profile</a></li>
                 {% endif %}
                 {% if request.user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li><a href="{% url 'logout' %}"><b>{{ request.user.username }}</b> Logout</a></li>
                 {% else %}
                     <li><a href="{% url 'login' %}">Login</a></li>
                 {% endif %}
