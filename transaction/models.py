@@ -39,9 +39,10 @@ class Transaction(models.Model):
         return u'#%s %s BTC %s CZK' % (self.id, self.amount_btc, self.amount_czk)
 
     def save(self, *args, **kwargs):
+        ret = super(Transaction, self).save(*args, **kwargs)
         if not self.wallet:
             self.wallet = get_wallet_from_xpub(self.profile.xpub, self.id)
-        return super(Transaction, self).save(*args, **kwargs)
+        return ret
 
     @staticmethod
     def create(profile, amount_btc=None, amount_czk=None, description=''):
