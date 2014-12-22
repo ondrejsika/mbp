@@ -22,6 +22,7 @@
                     <th>ID</th>
                     <th>Amount (BTC)</th>
                     <th>Amount (CZK)</th>
+                    <th>Timestamp</th>
                     <th>Profile</th>
                 </tr>
                 {% for tr in all_transactions %}
@@ -29,6 +30,7 @@
                         <td>{{ tr.id }}</td>
                         <td>{{ tr.amount_btc }} BTC</td>
                         <td>{{ tr.amount_czk }} CZK</td>
+                        <td>{{ tr.timestamp }}</td>
                         <td>{{ tr.profile.name }}</td>
                     </tr>
                 {% endfor %}
@@ -38,6 +40,7 @@
             <h2>Profiles</h2>
             <table class="table">
                 <tr>
+                    <th>ID</th>
                     <th>Name</th>
                     <th></th>
                     <th>Confirmed</th>
@@ -45,10 +48,9 @@
                 </tr>
                 {% for profile in request.user.account.profile_set.all %}
                     <tr>
-                        <td>{{ profile.name }}</td>
+                        <td>{{ profile.id }}</td>
+                        <td><a href="{% url 'profile:detail' profile.id %}">{{ profile.name }}</a></td>
                         <td>
-                            <a href="{% url 'profile:detail' profile.id %}" class="btn-sm btn-info">Detail</a>
-                            <a href="{% url 'profile:edit' profile.id %}" class="btn-sm btn-info">Edit</a>
                             <a href="{% url 'tr:creator' profile.id %}" class="btn-sm btn-info">Create payment</a>
                         </td>
                         <td style="color: green;">{{ profile.get_confirmed_amount.btc }} BTC<br>

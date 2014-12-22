@@ -58,6 +58,7 @@
                     <th>ID</th>
                     <th>Amount (BTC)</th>
                     <th>Amount (CZK)</th>
+                    <th>Timestamp</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -66,6 +67,7 @@
                         <td>{{ tr.id }}</td>
                         <td>{{ tr.amount_btc }} BTC</td>
                         <td>{{ tr.amount_czk }} CZK</td>
+                        <td>{{ tr.timestamp }}</td>
                         <td><a target="_blank" href="https://blockchain.info/address/{{ tr.wallet }}">{{ tr.wallet }}</a></td>
                         <td><a target="_blank" href="{% url 'tr:payment_detail' tr.token %}" class="btn-sm btn-info">Payment page</a></td>
                     </tr>
