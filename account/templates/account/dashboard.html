@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load i18n utils %}
 {% block container %}
     <h1>Dashboard</h1>
     <div class="row">
@@ -30,7 +30,7 @@
                         <td>{{ tr.id }}</td>
                         <td>{{ tr.amount_btc }} BTC</td>
                         <td>{{ tr.amount_czk }} CZK</td>
-                        <td>{{ tr.timestamp }}</td>
+                        <td>{{ tr.timestamp|ymdhm }}</td>
                         <td>{{ tr.profile.name }}</td>
                     </tr>
                 {% endfor %}
