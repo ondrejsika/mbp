@@ -8,6 +8,7 @@ from profile.models import Profile
 from currency import to_btc_czk
 from main_utils import timestamp_random_string
 from main_utils.wallet import get_wallet_from_xpub
+from main_utils.qrcode_utils import qrcode_datauri
 
 # local
 from .utils import is_confirmed
@@ -60,3 +61,6 @@ class Transaction(models.Model):
 
     def url(self):
         return settings.ORIGIN + reverse('tr:payment_detail', args=(self.token, ))
+
+    def get_payment_qrcode(self):
+        return qrcode_datauri('bitcoin:%s?amount=%s' % (self.wallet, self.amount_btc))
