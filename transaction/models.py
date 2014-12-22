@@ -67,5 +67,8 @@ class Transaction(models.Model):
     def url(self):
         return settings.ORIGIN + reverse('tr:payment_detail', args=(self.token, ))
 
+    def get_payment_url(self):
+        return 'bitcoin:%s?amount=%s' % (self.wallet, self.amount_btc)
+
     def get_payment_qrcode(self):
-        return qrcode_datauri('bitcoin:%s?amount=%s' % (self.wallet, self.amount_btc))
+        return qrcode_datauri(self.get_payment_url())
