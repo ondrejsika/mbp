@@ -10,7 +10,7 @@ class Profile(models.Model):
     account = models.ForeignKey(Account)
     name = models.CharField(max_length=64)
     description = models.TextField()
-    token = models.CharField(max_length=32, unique=True, default=timestamp_random_string)
+    token = models.CharField(max_length=32, unique=True, default=timestamp_random_string, db_index=True)
     xpub = models.CharField(max_length=256)
 
     def __unicode__(self):

@@ -23,22 +23,25 @@ class Transaction(models.Model):
     }
 
     profile = models.ForeignKey(Profile)
-    token = models.CharField(max_length=32, unique=True, default=timestamp_random_string)
+    token = models.CharField(max_length=32, unique=True, default=timestamp_random_string, db_index=True)
     amount_btc = models.DecimalField(max_digits=12, decimal_places=8)
     amount_czk = models.DecimalField(max_digits=12, decimal_places=2)
     state = models.CharField(max_length=1, choices=STATES.items(), default=UNCONFIRMED)
     timestamp = models.DateTimeField(auto_now_add=True)
     description = models.TextField(blank=True, default='')
 
-    @property
-    def wallet(self):
-        return get_wallet_from_xpub(self.profile.xpub, self.id)
+    wallet = models.CharField(max_length=40)
 
     class Meta:
         ordering = ('-pk', )
 
     def __unicode__(self):
         return u'#%s %s BTC %s CZK' % (self.id, self.amount_btc, self.amount_czk)
+
+    def save(self, *args, **kwargs):
+        if not self.wallet:
+            self.wallet = get_wallet_from_xpub(self.profile.xpub, self.id)
+        return super(Transaction, self).save(*args, **kwargs)
 
     @staticmethod
     def create(profile, amount_btc=None, amount_czk=None, description=''):
