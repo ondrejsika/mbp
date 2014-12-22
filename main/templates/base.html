@@ -26,7 +26,11 @@
         height: 100px;
     }
     </style>
-    {% include "menu.html" %}
+    {% if not hide_menu %}
+        {% include "menu.html" %}
+    {% else %}
+        {% include "hide_menu.html" %}
+    {% endif %}
 
     <div class="container">
     {% block container %}

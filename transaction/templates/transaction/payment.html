@@ -1,86 +1,42 @@
-<style>
-    * {
-        font-family: Arial;
-    }
-    input {
-        font-family: monospace;
-        width: 300px;
-    }
-</style>
+{% extends 'base.html' %}
 
-<img src="{{ STATIC_URL }}mbp_logo.png" style="width: 40px;">
-<h1 style="display: inline-block">My Bitcoin Payments</h1>
-<h2>Payment details - {% if transaction.description %}{{ transaction.description }}{% endif %}</h2>
-<table width="100%">
-    <tr>
-        <td width="50%">
-            <table width="100%">
-                <tr>
-                    <td>
-                        Wallet
-                    </td>
-                    <td>
-                        <input value="{{ transaction.wallet }}" disabled>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Amount (BTC)
-                    </td>
-                    <td>
-                        <input value="{{ transaction.amount_btc }}" disabled>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <img src="{{ transaction.get_payment_qrcode }}">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Amount (CZK)
-                    </td>
-                    <td>
-                        {{ transaction.amount_czk }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        State
-                    </td>
-                    <td>
-                        <span style="color: {% if transaction.state == transaction.CONFIRMED %}green{% else %}red{% endif %};">
-                            {{ transaction.get_state_display }}
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Timestamp
-                    </td>
-                    <td>
-                        {{ transaction.timestamp }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Transaction ID
-                    </td>
-                    <td>
-                        {{ transaction.id }}
-                    </td>
-                </tr>
-            </table>
-        </td>
-        <td width="50%" valign="top">
-            <h3>{{ transaction.profile.name }}</h3>
-            <p>{{ transaction.profile.description|linebreaksbr }}</p>
-        </td>
-    </tr>
-</table>
-
-<hr>
-
-2014 &copy; <a href="http://mybitcoinpayments.com">My Bitcoin Payments</a>
+{% block container %}
+<h2>Payment details{% if transaction.description %} - {{ transaction.description }}{% endif %}</h2>
+<div class="row">
+    <div class="col-lg-3">
+        <img src="{{ transaction.get_payment_qrcode }}">
+    </div>
+    <div class="col-lg-5">
+        <b>Wallet</b>
+        <pre>{{ transaction.wallet }}</pre>
+        <b>Amount (BTC)</b>
+        <pre>{{ transaction.amount_btc }}</pre>
+        <table class="table">
+            <tr>
+                <th>Amount (CZK)</th>
+                <td>{{ transaction.amount_czk }}</td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td>
+                    <span style="color: {% if transaction.state == transaction.CONFIRMED %}green{% else %}red{% endif %};">
+                        {{ transaction.get_state_display }}
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <th>Timestamp</th>
+                <td>{{ transaction.timestamp }}</td>
+            </tr>
+            <tr>
+                <th>Transaction ID</th>
+                <td>{{ transaction.id }}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-lg-4">
+        <h3>{{ transaction.profile.name }}</h3>
+        <p>{{ transaction.profile.description|linebreaksbr }}</p>
+    </div>
+</div>
+{% endblock container %}

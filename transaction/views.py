@@ -43,6 +43,7 @@ def payment_view(request, token):
 
     return render(request, 'transaction/payment.html', {
         'transaction': tr,
+        'hide_menu': True,
     })
 
 
