@@ -39,6 +39,7 @@ INSTALLED_APPS = (
 
     # lib
     'south',
+    'debug_toolbar',
 
     # local
     'main',
