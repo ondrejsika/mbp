@@ -25,16 +25,17 @@
                     <th>Timestamp</th>
                     <th>Profile</th>
                 </tr>
-                {% for tr in all_transactions %}
+                {% for tr in all_transactions.object_list %}
                     <tr style="color: {% if tr.state == tr.CONFIRMED %}green{% else %}red{% endif %};">
                         <td>{{ tr.id }}</td>
                         <td>{{ tr.amount_btc }} BTC</td>
                         <td>{{ tr.amount_czk }} CZK</td>
-                        <td>{{ tr.timestamp|ymdhm }}</td>
+{#                        <td>{{ tr.timestamp|ymdhm }}</td>#}
                         <td>{{ tr.profile.name }}</td>
                     </tr>
                 {% endfor %}
             </table>
+            {% include 'paginator.html' with page=all_transactions %}
         </div>
         <div class="col-lg-6">
             <h2>Profiles</h2>

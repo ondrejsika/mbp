@@ -1,0 +1,22 @@
+{% load i18n utils %}
+{% if page.paginator.num_pages > 1 %}
+    <nav>
+        <ul class="pagination">
+            {% if page.paginator.num_pages < 10 %}
+                {% for n in page.paginator.page_range %}
+                    <li class="{% if page.number == n %}active{% endif %}"><a href="?page={{ n }}">{{ n }}</a></li>
+                {% endfor %}
+            {% else %}
+                {% if page.number != 1 %}
+                    <li><a href="?page=1">1</a></li>
+                    <li><a href="?page={{ page.previous_page_number }}">&laquo;</a></li>
+                {% endif %}
+                <li class="active"><a href="#">{{ page.number }} <span class="sr-only">(current)</span></a></li>
+                {% if page.number != page.paginator.num_pages %}
+                    <li><a href="?page={{ page.next_page_number }}">&raquo;</a></li>
+                    <li><a href="?page={{ page.paginator.num_page }}">{{ page.paginator.num_pages }}</a></li>
+                {% endif %}
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}

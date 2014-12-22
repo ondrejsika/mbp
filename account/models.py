@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 class Account(models.Model):
     user = models.OneToOneField(User)
     email = models.EmailField()
+    rows_on_page = models.IntegerField(default=20)
 
     # privileges
     priv_editable_xpubs = models.BooleanField(default=False)
