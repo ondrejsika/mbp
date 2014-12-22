@@ -26,6 +26,7 @@ class Transaction(models.Model):
     token = models.CharField(max_length=32, unique=True, default=timestamp_random_string, db_index=True)
     amount_btc = models.DecimalField(max_digits=12, decimal_places=8)
     amount_czk = models.DecimalField(max_digits=12, decimal_places=2)
+    rate_btc_czk = models.IntegerField()
     state = models.CharField(max_length=1, choices=STATES.items(), default=UNCONFIRMED)
     timestamp = models.DateTimeField(auto_now_add=True)
     description = models.TextField(blank=True, default='')
@@ -47,11 +48,12 @@ class Transaction(models.Model):
 
     @staticmethod
     def create(profile, amount_btc=None, amount_czk=None, description=''):
-        amount_btc, amount_czk = to_btc_czk(amount_btc, amount_czk)
+        amount_btc, amount_czk, rate = to_btc_czk(amount_btc, amount_czk, profile=profile)
         tr = Transaction(
             profile=profile,
             amount_btc=amount_btc,
             amount_czk=amount_czk,
+            rate_btc_czk=rate,
             description=description,
         )
         tr.save()

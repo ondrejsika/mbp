@@ -6,6 +6,9 @@ from django.http import HttpResponseForbidden
 # django contrib
 from django.contrib.auth.decorators import login_required
 
+# project
+from currency import to_btc_czk
+
 # local
 from .models import Profile
 from .forms import ProfileForm
@@ -14,9 +17,11 @@ from .forms import ProfileForm
 @login_required
 def detail_view(request, profile_id):
     profile = get_object_or_404(Profile, id=profile_id)
+    rate_btc_czk = to_btc_czk(amount_btc=1, profile=profile)[2]
 
     return render(request, 'profile/detail.html', {
         'profile': profile,
+        'rate_btc_czk': rate_btc_czk,
     })
 
 
