@@ -1,0 +1,7 @@
+django=1.6.7
+south
+django-debug-toolbar
+qrcode
+blockchain
+bip32utils
+ecdsa
