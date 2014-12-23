@@ -26,6 +26,8 @@ def create_view(request):
 
     if not bool(amount_czk) != bool(amount_btc):
         return HttpResponseBadRequest('amount_czk XOR amount_btc')
+    if min(amount_czk, amount_btc) <= 0:
+        return HttpResponseBadRequest('amount MUST BE POSITIVE')
 
     profile = get_object_or_404(Profile, token=token)
 
