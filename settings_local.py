@@ -1,12 +1,10 @@
-import os
-_BASE_DIR = os.path.dirname(__file__)
-
-DATABASES_ENGINE = 'django.db.backends.sqlite3'
-DATABASES_NAME = os.path.join(_BASE_DIR, 'db.sqlite3')
-DATABASES_USER = None
-DATABASES_PASSWORD = None
-DATABASES_HOST = None
-DATABASES_PORT = None
+DATABASES_ENGINE = 'django.db.backends.postgresql_psycopg2'
+DATABASES_NAME = 'mbp'
+DATABASES_USER = 'postgres'
+DATABASES_PASSWORD = 'pg'
+DATABASES_HOST = '127.0.0.1'
+DATABASES_PORT = 5432
 
 ORIGIN = 'http://localhost:8000'
 DEFAULT_XPUB = 'xpub6BmJBbHkjXnr82jg4JdNsGAzsZeyCzeXfPJo7UtmsMfiJ5hqB3xGnocSvfbAXGKoC8GCiTGM7mVR9QNWtECScVS1ANswyE7CvMFmk5UiQ8o'
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
