@@ -1,5 +1,5 @@
 # django
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.conf import settings
 
@@ -38,7 +38,12 @@ def create_view(request):
         amount_btc=amount_btc,
         description=description,
     )
-    return HttpResponse(tr.url())
+    url = tr.url()
+
+    if request.REQUEST.get('_redirect'):
+        return HttpResponseRedirect(url)
+
+    return HttpResponse(url)
 
 
 def payment_view(request, token):

@@ -37,6 +37,6 @@
             </div>
         </div>
         <pre>{{ ORIGIN }}{% url 'tr:payment_create' %}?token={{ profile.token }}&amount_czk={% verbatim %}{{ amount_czk }}&amount_btc={{ amount_btc }}&description={{ description }}{% endverbatim %}</pre>
-        <a target="_blank" class="btn btn-info" href="{{ ORIGIN }}{% url 'tr:payment_create' %}?token={{ profile.token }}&amount_czk={% verbatim %}{{ amount_czk }}&amount_btc={{ amount_btc }}&description={{ description }}{% endverbatim %}">Create payment</a></a>
+        <a target="_blank" class="btn btn-info" href="{{ ORIGIN }}{% url 'tr:payment_create' %}?token={{ profile.token }}&amount_czk={% verbatim %}{{ amount_czk }}&amount_btc={{ amount_btc }}&description={{ description }}&_redirect=1{% endverbatim %}">Create payment</a></a>
     </div>
 {% endblock container %}
