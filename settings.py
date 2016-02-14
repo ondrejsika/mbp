@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 BASE_DIR = os.path.dirname(__file__)
 
+import settings_local
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -85,8 +86,12 @@ WSGI_APPLICATION = 'wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': settings_local.DATABASES_ENGINE,
+        'NAME': settings_local.DATABASES_NAME,
+        'USER': settings_local.DATABASES_USER,
+        'PASSWORD': settings_local.DATABASES_PASSWORD,
+        'HOST': settings_local.DATABASES_HOST,
+        'PORT': settings_local.DATABASES_PORT,
     }
 }
 
@@ -110,9 +115,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-ORIGIN = 'http://localhost:8000'
+ORIGIN = settings_local.ORIGIN
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 
-DEFAULT_XPUB = 'xpub6BmJBbHkjXnr82jg4JdNsGAzsZeyCzeXfPJo7UtmsMfiJ5hqB3xGnocSvfbAXGKoC8GCiTGM7mVR9QNWtECScVS1ANswyE7CvMFmk5UiQ8o'
+DEFAULT_XPUB = settings_local.DEFAULT_XPUB

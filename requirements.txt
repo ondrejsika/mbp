@@ -5,3 +5,5 @@ qrcode
 blockchain
 bip32utils
 ecdsa
+psycopg2
+
