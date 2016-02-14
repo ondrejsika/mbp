@@ -5,4 +5,5 @@
 /static
 .env
 settings_local.py
+*.egg-info
 
