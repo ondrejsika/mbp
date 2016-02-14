@@ -33,5 +33,12 @@ Setup cron job
 
 ## Live version
 
-__<http://mbp.sikaapp.cz>__
+Live:
 
+- <https://mbp.sikaapp.cz>
+
+Demo:
+
+- <https://mbp-demo.sikaapp.cz>
+- user: __demo__
+- password: __demo__
