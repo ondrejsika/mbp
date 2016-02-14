@@ -6,4 +6,5 @@ blockchain
 bip32utils
 ecdsa
 psycopg2
+pillow
 
