@@ -13,6 +13,9 @@ Setup base project
 
     git clone git@github.com:ondrejsika/mbp.git
     cd mbp
+    cp setting_local--template.py settings_local.py
+    # edit settings_local.py
+    vim settings_local.py
     virtualenv .env
     source .env/bin/activate
     pip install -e .
@@ -30,6 +33,13 @@ Setup cron job
     # add to your crontab
     */12 * * * * cd /home/projects/mbp && .env/bin/python manage.py confirm_transactions
 
+
+### Settings
+
+- `DATABASE_*` - configurate DB connection
+- `ORIGIN` - site origin like `https://mbp.sikaapp.cz` in production, `http://localhost:8000` in development
+- `DEFAULT_XPUB` - default xpub used for new profiles, if custom xpubs are disabled
+- `DEBUG_TOOLBAR_PATCH_SETTINGS` - must be `False` if site run in gunicorn
 
 ## Live version
 
