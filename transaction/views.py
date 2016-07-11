@@ -43,7 +43,10 @@ def create_view(request):
     if request.REQUEST.get('_redirect'):
         return HttpResponseRedirect(url)
 
-    return HttpResponse(url)
+    response = HttpResponse(url)
+    response['Access-Control-Allow-Origin'] = '*'
+    response['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+    return response
 
 
 def payment_view(request, token):
