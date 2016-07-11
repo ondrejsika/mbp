@@ -1,3 +1,7 @@
+# python
+import json
+import time
+
 # django
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -13,6 +17,8 @@ from .models import Transaction
 def create_view(request):
     token = request.REQUEST.get('token')
     description = request.REQUEST.get('description', '')
+    response_format = request.REQUEST.get('format', 'link')
+
     try:
         amount_btc = request.REQUEST.get('amount_btc')
         float(amount_btc)
@@ -44,6 +50,19 @@ def create_view(request):
         return HttpResponseRedirect(url)
 
     response = HttpResponse(url)
+    if response_format == 'json':
+        response = HttpResponse(json.dumps({
+            'payment_page': url,
+            'qrcode': tr.get_payment_qrcode(),
+            'payment_url': tr.get_payment_url(),
+            'amount_btc': tr.amount_btc,
+            'amount_czk': tr.amount_czk,
+            'description': tr.description,
+            'rate_btc_czk': tr.rate_btc_czk,
+            'timestamp': time.mktime(tr.timestamp.timetuple()),
+            'wallet': tr.wallet,
+        }), content_type='application/json')
+
     response['Access-Control-Allow-Origin'] = '*'
     response['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
     return response
