@@ -17,7 +17,7 @@ setup(
         'blockchain==1.2.1',
         'django-debug-toolbar==1.3.0',
         'ecdsa==0.13',
-        'gunicorn==19.4.5',
+        'gunicorn==19.5.0',
         'psycopg2==2.6.1',
         'qrcode==5.2.2',
      ],
